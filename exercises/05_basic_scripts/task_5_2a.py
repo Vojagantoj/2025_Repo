@@ -49,3 +49,22 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+ipad = input("Введите адрес устройства в формате ip/mask: ")
+list = ipad.split('/')
+ip = list[0].split('.')
+network = '''{0:08b}{1:08b}{2:08b}{3:08b}'''
+a = network.format(int(ip[0]), int(ip[1]), int(ip[2]), int(ip[3]))
+b = a[:int(list[1])] + "0" * (32 - int(list[1]))
+mask = int(list[1]) * "1" + "0" * (32 - int(list[1]))
+ip_template = '''
+Network:
+{0:<10} {1:<10} {2:<10} {3:<10}
+{0:08b}   {1:08b}   {2:08b}   {3:08b}
+
+Mask:
+/{4}
+{5:<10} {6:<10} {7:<10} {8:<10}
+{5:08b}   {6:<08b}   {7:08b}   {8:08b}
+
+'''
+print(ip_template.format(int(b[:8], 2),int(b[8:16], 2),int(b[16:24], 2),int(b[24:], 2), list[1], int(mask[:8], 2),int(mask[8:16], 2),int(mask[16:24], 2),int(mask[24:], 2)))

@@ -12,3 +12,15 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+ipadd = input("Введите адрес: ")
+ipadd = ipadd.split(".")
+if 1 <= int(ipadd[0]) <= 223:
+    print('unicast')
+elif 224 <= int(ipadd[0]) <= 239:
+    print('multicast')
+elif int(ipadd[0]) == int(ipadd[1]) == int(ipadd[2]) == int(ipadd[3]) == 255:
+    print('local broadcast')
+elif int(ipadd[0]) == int(ipadd[1]) == int(ipadd[2]) == int(ipadd[3]) == 0:
+    print('unassigned')
+else:
+    print('unused')

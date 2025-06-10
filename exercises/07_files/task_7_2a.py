@@ -17,3 +17,15 @@
 """
 
 ignore = ["duplex", "alias", "configuration"]
+from sys import argv
+b = str()
+file = argv[1]
+ign = set(ignore)
+with open(file) as f:
+    for line in f:
+        lines = set(line.split())
+        if ign.intersection(lines) or line.startswith('!'):
+            continue
+        else:
+            b += line
+print(b)

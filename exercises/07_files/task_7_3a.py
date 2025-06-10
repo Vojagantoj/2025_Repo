@@ -40,3 +40,21 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+fix = []
+i = 0
+with open('CAM_table.txt') as f:
+    for line in f:
+        lines = line.split()
+        if line == '\n':
+            continue
+        elif lines[0].isdigit():
+            lines.insert(0, int(lines[0]))
+            lines.pop(1)
+            lines.remove('DYNAMIC')
+            fix += [lines]
+        else:
+            continue
+    fis = sorted(fix)
+    for i in range(len(fis)):
+        vlan, mac, intf = fis[i]
+        print("{:<9} {:<16} {:>11}".format(vlan, mac, intf))

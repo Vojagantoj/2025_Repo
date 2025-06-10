@@ -20,3 +20,13 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+with open('CAM_table.txt') as f:
+    for line in f:
+        lines = line.split()
+        if line == '\n':
+            continue
+        elif lines[0].isdigit():
+            vlan, mac, err, intf = lines
+            print("{:<9} {:<16} {:>11}".format(vlan, mac, intf))
+        else:
+            continue

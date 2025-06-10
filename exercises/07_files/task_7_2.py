@@ -39,3 +39,13 @@ interface Ethernet0/3
 ...
 
 """
+from sys import argv
+b = str()
+file = argv[1]
+with open(file) as f:
+    for line in f:
+        if line.startswith('!'):
+            continue
+        else:
+            b += line
+print(b)

@@ -25,3 +25,28 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+def get_int_vlan_map(config_filename):
+    '''Создаем карту интерфейс - вланы'''
+    with open(config_filename, 'r') as f:
+        access = dict()
+        trunk = dict()
+        result = []
+        for line in f:
+            if line.startswith('interface '):
+                inter = line.split()[-1]
+                continue
+            elif 'switchport mode access' in line:
+                access[inter] = int('1')
+            elif 'access vlan' in line:
+                access[inter] = int(line.split()[-1])
+                continue
+            elif 'trunk allowed' in line:
+                vlans = line.split()[-1]
+                doom = []
+                for i in vlans.split(','):
+                    doom.append(int(i))
+                    trunk[inter] = doom
+    result.append(access)
+    result.append(trunk)
+    result = tuple(result)
+    return result

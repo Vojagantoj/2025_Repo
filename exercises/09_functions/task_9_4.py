@@ -64,3 +64,19 @@ def ignore_command(command, ignore):
         if word in command:
             ignore_status = True
     return ignore_status
+def convert_config_to_dict(config_filename):
+    '''Длинное повторение того, что написано выше'''
+    with open(config_filename, 'r') as f:
+        result = dict()
+        command = 'int'
+        for line in f:
+            if line == '\n' or line.startswith('!') or ignore_command(line, ignore):
+                continue
+            elif not line.startswith(' '):
+                result[line.strip()] = []
+                giga = []
+                jin = list(result.keys())
+            elif line.startswith(' '):
+                giga.append(line.strip())
+            result[jin[-1]] = giga
+    return result
